@@ -2,14 +2,15 @@ pipeline {
     agent any
 
   environment {
-      PATH = "${PATH}:${getTerraformpath()}"
+      PATH = "${PATH}:${geTerraformpath()}"
     }
     
 
     stages {
-        stage('terraform-init') {
+        stage('terraform-init & apply ') {
             steps {
-                echo 'terraform init'
+                sh  'terraform init'
+                sh  'terraform apply'
             }
         }
     }
