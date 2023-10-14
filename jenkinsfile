@@ -7,10 +7,16 @@ pipeline {
     
 
     stages {
-        stage('terraform-init & apply') {
+        stage('terraform-init') {
             steps {
-                sh  'terraform init'
-                sh  'terraform apply'
+                echo 'terraform init'
+            }
+        }
+    }
+     stages {
+        stage('terraform-apply') {
+            steps {
+                echo 'terraform apply'
             }
         }
     }
