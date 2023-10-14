@@ -1,23 +1,29 @@
 pipeline {
     agent any
+    
     environment {
-        PATH = "${PATH}:${getTerraformpath()}"
+        TF_PLUGIN_CACHE_DIR = "${WORKSPACE}/.terraform.d/plugin-cache"
+        TF_CLI_CONFIG_FILE = "${WORKSPACE}/.terraformrc"
+        TF_LOG = "TRACE" // Set the log level as needed
     }
-    stages {
-        stage('terraform-init') {
-            steps {
-                echo 'terraform init'
-            }
-        }
-        stage('terraform-destroy') {
-            steps {
-                echo 'terraform destroy'
-            }
-        }
-    }
-}
 
-def getTerraformpath() {
-    def tfHome = tool name: 'terraform-server', type: 'terraform'
-    return tfHome
+    stages {
+        stage('Terraform Init') {
+            steps {
+                script {
+                    // Initialize Terraform
+                    sh 'terraform init'
+                }
+            }
+        }
+
+        stage('Terraform Apply') {
+            steps {
+                script {
+                    // Apply Terraform changes (you may want to include options like -auto-approve)
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+    }
 }
