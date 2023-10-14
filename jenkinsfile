@@ -9,9 +9,9 @@ pipeline {
                 echo 'terraform init'
             }
         }
-        stage('terraform-apply') {
+        stage('terraform-destroy') {
             steps {
-                echo 'terraform apply'
+                echo 'terraform destroy'
             }
         }
     }
