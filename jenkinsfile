@@ -7,7 +7,7 @@ pipeline {
     
 
     stages {
-        stage('terraform-init & apply ') {
+        stage('terraform-init & apply') {
             steps {
                 sh  'terraform init'
                 sh  'terraform apply'
